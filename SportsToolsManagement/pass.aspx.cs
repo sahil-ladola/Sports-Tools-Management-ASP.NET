@@ -44,8 +44,17 @@ namespace SportsToolsManagement
         }
 
         protected void btnencrypt_Click(object sender, EventArgs e)
-        {
-            
+        { 
+                using (SqlCommand cmd = new SqlCommand("INSERT INTO login VALUES(@username, @password)"))
+                {
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Parameters.AddWithValue("@username", txtUser.Text.Trim());
+                    cmd.Parameters.AddWithValue("@password", this.Encrypt(txtpassword.Text.Trim()));
+                    cmd.Connection = con;
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                }
         }
     }
 }
