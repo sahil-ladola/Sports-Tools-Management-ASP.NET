@@ -11,7 +11,7 @@ namespace SportsToolsManagement
 {
 
 
-    public partial class dashboard
+    public partial class Check_Out
     {
 
         /// <summary>
@@ -96,6 +96,24 @@ namespace SportsToolsManagement
         protected global::System.Web.UI.WebControls.HyperLink HyperLink6;
 
         /// <summary>
+        /// txtsearch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtsearch;
+
+        /// <summary>
+        /// Search control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton Search;
+
+        /// <summary>
         /// HyperLink7 control.
         /// </summary>
         /// <remarks>
@@ -103,23 +121,5 @@ namespace SportsToolsManagement
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink HyperLink7;
-
-        /// <summary>
-        /// HyperLink8 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink HyperLink8;
-
-        /// <summary>
-        /// HyperLink9 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink HyperLink9;
     }
 }

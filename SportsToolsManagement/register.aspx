@@ -30,48 +30,24 @@
                             <p>Dashboard</p>
                         </asp:HyperLink>
                     </li>
-                    <%--<li>
-                        <a href="./icons.html">
-                            <i class="now-ui-icons education_atom"></i>
-                            <p>Icons</p>
-                        </a>
-                    </li>--%>
-                    <%--<li>
-                        <a href="./map.html">
-                            <i class="now-ui-icons location_map-big"></i>
-                            <p>Maps</p>
-                        </a>
-                    </li>--%>
-                    <%--<li>
-                        <a href="./notifications.html">
-                            <i class="now-ui-icons ui-1_bell-53"></i>
-                            <p>Notifications</p>
-                        </a>
-                    </li>--%>
                     <li class="active">
                         <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/register.aspx">
                             <i class="now-ui-icons users_single-02"></i>
                             <p>Customer Registration</p>
                         </asp:HyperLink>
                     </li>
-                    <%--<li>
-                        <a href="./tables.html">
-                            <i class="now-ui-icons design_bullet-list-67"></i>
-                            <p>Table List</p>
-                        </a>
-                    </li>--%>
-                    <%--<li>
-                        <a href="./typography.html">
-                            <i class="now-ui-icons text_caps-small"></i>
-                            <p>Typography</p>
-                        </a>
-                    </li>--%>
-                    <%--<li class="active-pro">
-                        <a href="./upgrade.html">
-                            <i class="now-ui-icons arrows-1_cloud-download-93"></i>
-                            <p>Upgrade to PRO</p>
-                        </a>
-                    </li>--%>
+                    <li>
+                        <asp:HyperLink ID="HyperLink10" runat="server" NavigateUrl="~/Check-in.aspx">
+                            <i class="now-ui-icons ui-1_simple-add"></i>
+                            <p>Check-In</p>
+                        </asp:HyperLink>
+                    </li>
+                    <li>
+                        <asp:HyperLink ID="HyperLink11" runat="server" NavigateUrl="~/Check-Out.aspx">
+                            <i class="now-ui-icons ui-1_simple-delete"></i>
+                            <p>Check-Out</p>
+                        </asp:HyperLink>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -196,7 +172,7 @@
                                         <div class="col-md-4 px-1">
                                             <div class="form-group">
                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ControlToValidate="txtArea" ErrorMessage="All field must be filled" Display="Dynamic" ForeColor="OrangeRed" Font-Bold="True" Font-Size="Small"></asp:RequiredFieldValidator>
-                                                <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="txtArea" ErrorMessage="Invalid Area" ValidationExpression="[a-zA-Z][a-zA-Z]{2,}" Display="Dynamic" ForeColor="OrangeRed" Font-Bold="True" Font-Size="Small"></asp:RegularExpressionValidator>
+                                                <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="txtArea" ErrorMessage="Invalid Area" ValidationExpression="[a-zA-Z][a-zA-Z ]{2,}" Display="Dynamic" ForeColor="OrangeRed" Font-Bold="True" Font-Size="Small"></asp:RegularExpressionValidator>
                                             </div>
                                         </div>
                                         <div class="col-md-4 pl-1">
@@ -228,18 +204,17 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-3 pr-1">
-                                            
                                         </div>
                                         <div class="col-md-4 px-1">
                                             <div class="form-group">
                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ControlToValidate="txtMobileNum" ErrorMessage="All field must be filled" Display="Dynamic" ForeColor="OrangeRed" Font-Bold="True" Font-Size="Small"></asp:RequiredFieldValidator>
-                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" ControlToValidate="txtMobileNum" ErrorMessage="Invalid Contact number" Display="Dynamic" ValidationExpression="[6789][0-9]{9}" ForeColor="OrangeRed" Font-Bold="True" Font-Size="Small"></asp:RegularExpressionValidator>
+                                                <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" ControlToValidate="txtMobileNum" ErrorMessage="Invalid Contact number" Display="Dynamic" ValidationExpression="[6789][0-9]{9}" ForeColor="OrangeRed" Font-Bold="True" Font-Size="Small"></asp:RegularExpressionValidator>
                                             </div>
                                         </div>
                                         <div class="col-md-5 pl-1">
                                             <div class="form-group">
                                                 <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ControlToValidate="txtEmail" ErrorMessage="Invalid Email address" ValidationExpression="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" Display="Dynamic" ForeColor="OrangeRed" Font-Bold="True" Font-Size="Small"></asp:RegularExpressionValidator>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ControlToValidate="txtEmail" ErrorMessage="All field must be filled" Display="Dynamic" ForeColor="OrangeRed" Font-Bold="True" Font-Size="Small"></asp:RequiredFieldValidator>
+                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ControlToValidate="txtEmail" ErrorMessage="All field must be filled" Display="Dynamic" ForeColor="OrangeRed" Font-Bold="True" Font-Size="Small"></asp:RequiredFieldValidator>
                                             </div>
                                         </div>
                                     </div>
@@ -247,7 +222,7 @@
                                         <div class="col-md-3 pr-1">
                                             <div class="form-group">
                                                 <label for="gender">Select Gender</label>
-                                                <asp:DropDownList id="gender" class="form-control" runat="server" OnSelectedIndexChanged="gender_SelectedIndexChanged">
+                                                <asp:DropDownList ID="gender" class="form-control" runat="server" OnSelectedIndexChanged="gender_SelectedIndexChanged">
                                                     <asp:ListItem>Male</asp:ListItem>
                                                     <asp:ListItem>Female</asp:ListItem>
                                                 </asp:DropDownList>
@@ -262,7 +237,7 @@
                                         <div class="col-md-5 pl-1">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Email address</label>
-                                                <asp:TextBox ID="txtEmail" class="form-control" placeholder="Email"  runat="server"></asp:TextBox>
+                                                <asp:TextBox ID="txtEmail" class="form-control" placeholder="Email" runat="server"></asp:TextBox>
                                             </div>
                                         </div>
                                     </div>

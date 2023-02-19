@@ -25,7 +25,12 @@ namespace SportsToolsManagement
                 Response.AddHeader("Cache-Control", "no-cache, no-store, max-age=0, must-revalidate");
                 Response.AddHeader("Pragma", "no-cache");
             }
-
+            if(!IsPostBack)
+            {
+                ListItem selectItem = new ListItem("Select gender", "-1");
+                selectItem.Selected = true;
+                gender.Items.Insert(0, selectItem);
+            }
             if (IsPostBack)
             {
                 if (ViewState["fname"] != null)
@@ -73,35 +78,43 @@ namespace SportsToolsManagement
             string select = "select * from customer where email='" + txtEmail.Text + "'";
             SqlCommand cmd = new SqlCommand(select, con);
             SqlDataReader dr = cmd.ExecuteReader();
-            if (dr.Read() == true)
+            if (gender.SelectedValue == "-1")
             {
-                Page.ClientScript.RegisterStartupScript(this.GetType(), "script", "<script>alert('User already exists')</script>");
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "script", "<script>alert('Select Gender!!!!')</script>");
             }
             else
             {
-                dr.Close();
-
-
-                string query = "insert into customer (fname,lname,address,landmark,area,postalcode,gender,contactno,email) values('" + txtFname.Text + "','" + txtLname.Text + "','" + txtAddress.Text + "','" + txtLandmark.Text + "','" + txtArea.Text + "','" + txtPostalCode.Text + "','" + gender.SelectedValue + "','" + txtMobileNum.Text + "','" + txtEmail.Text + "')";
-                SqlCommand ins = new SqlCommand(query, con);
-                if (ins.ExecuteNonQuery() != 0)
+                if (dr.Read() == true)
                 {
-                    con.Close();
-                    Page.ClientScript.RegisterStartupScript(this.GetType(), "script", "<script>alert('Registered successfully!!!!!')</script>");
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "script", "<script>alert('User already exists')</script>");
                 }
                 else
                 {
-                    ViewState["gender"] = gender.SelectedValue;
-                    ViewState["email"] = txtEmail.Text;
-                    ViewState["contact"] = txtMobileNum.Text;
-                    ViewState["postalcode"] = txtPostalCode.Text;
-                    ViewState["area"] = txtArea.Text;
-                    ViewState["landmark"] = txtLandmark.Text; ;
-                    ViewState["address"] = txtAddress.Text;
-                    ViewState["lname"] = txtLname.Text;
-                    ViewState["fname"] = txtFname.Text;
+                    dr.Close();
 
-                    Page.ClientScript.RegisterStartupScript(this.GetType(), "script", "<script>alert('Something went wrong , Try again!!!!!')</script>");
+
+                    string query = "insert into customer (fname,lname,address,landmark,area,postalcode,gender,contactno,email) values('" + txtFname.Text + "','" + txtLname.Text + "','" + txtAddress.Text + "','" + txtLandmark.Text + "','" + txtArea.Text + "','" + txtPostalCode.Text + "','" + gender.SelectedValue + "','" + txtMobileNum.Text + "','" + txtEmail.Text + "')";
+                    SqlCommand ins = new SqlCommand(query, con);
+                    if (ins.ExecuteNonQuery() != 0)
+                    {
+                        con.Close();
+                        Page.ClientScript.RegisterStartupScript(this.GetType(), "script", "<script>alert('Registered successfully!!!!!')</script>");
+                        Response.Redirect("dashboard.aspx");
+                    }
+                    else
+                    {
+                        ViewState["gender"] = gender.SelectedValue;
+                        ViewState["email"] = txtEmail.Text;
+                        ViewState["contact"] = txtMobileNum.Text;
+                        ViewState["postalcode"] = txtPostalCode.Text;
+                        ViewState["area"] = txtArea.Text;
+                        ViewState["landmark"] = txtLandmark.Text; ;
+                        ViewState["address"] = txtAddress.Text;
+                        ViewState["lname"] = txtLname.Text;
+                        ViewState["fname"] = txtFname.Text;
+
+                        Page.ClientScript.RegisterStartupScript(this.GetType(), "script", "<script>alert('Something went wrong , Try again!!!!!')</script>");
+                    }
                 }
             }
         }

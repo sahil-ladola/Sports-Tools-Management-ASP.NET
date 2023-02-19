@@ -88,6 +88,10 @@
     <Content Include="assets\js\plugins\bootstrap-notify.js" />
     <Content Include="assets\js\plugins\chartjs.min.js" />
     <Content Include="assets\js\plugins\perfect-scrollbar.jquery.min.js" />
+    <Content Include="Check-in.aspx" />
+    <Content Include="Check-Out.aspx" />
+    <Content Include="checkindetails.aspx" />
+    <Content Include="checkoutdetails.aspx" />
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\bootstrap\mixins\_border-radius.css" />
     <Content Include="css\bootstrap\mixins\_screen-reader.css" />
@@ -108,6 +112,34 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Check-in.aspx.cs">
+      <DependentUpon>Check-in.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Check-in.aspx.designer.cs">
+      <DependentUpon>Check-in.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Check-Out.aspx.cs">
+      <DependentUpon>Check-Out.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Check-Out.aspx.designer.cs">
+      <DependentUpon>Check-Out.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="checkindetails.aspx.cs">
+      <DependentUpon>checkindetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="checkindetails.aspx.designer.cs">
+      <DependentUpon>checkindetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="checkoutdetails.aspx.cs">
+      <DependentUpon>checkoutdetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="checkoutdetails.aspx.designer.cs">
+      <DependentUpon>checkoutdetails.aspx</DependentUpon>
+    </Compile>
     <Compile Include="dashboard.aspx.cs">
       <DependentUpon>dashboard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
