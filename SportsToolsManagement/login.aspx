@@ -18,7 +18,7 @@
     <div class="container">
         <%--<div class="row justify-content-center">
             <div class="col-md-6 text-center mb-5">
-                <h2 class="heading-section">Login #04</h2>
+                <h2 class="heading-section">FunSports</h2>
             </div>
         </div>--%>
         <div class="row justify-content-center mt-5">
@@ -29,7 +29,7 @@
                     <div class="login-wrap p-4 p-md-5">
                         <div class="d-flex">
                             <div class="w-100">
-                                <h3 class="mb-4 border-bottom">Sign In</h3>
+                                <h3 class="mb-4 border-bottom">FunSports Sign In</h3>
                             </div>
                             <%--<div class="w-100">
                                 <p class="social-media d-flex justify-content-end">
@@ -39,17 +39,20 @@
                             </div>--%>
                         </div>
                         <form runat="server" class="signin-form">
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtUsername" ErrorMessage="All field must be filled" Display="Dynamic" ForeColor="OrangeRed" Font-Bold="True" Font-Size="Small"></asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator ID="validationfirstname" runat="server" ControlToValidate="txtUsername" ErrorMessage="Invalid Username" ValidationExpression="[a-zA-Z][a-zA-Z]{2,}" Display="Dynamic" ForeColor="OrangeRed" Font-Bold="True" Font-Size="Small"></asp:RegularExpressionValidator>
                             <div class="form-group mb-3">
                                 <label class="label" for="name">Username</label>
                                 <asp:TextBox placeholder="Username" ID="txtUsername" class="form-control" runat="server"></asp:TextBox>
                             </div>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ControlToValidate="txtPassword" ErrorMessage="All field must be filled" Display="Dynamic" ForeColor="OrangeRed" Font-Bold="True" Font-Size="Small"></asp:RequiredFieldValidator>
                             <div class="form-group mb-3">
                                 <label class="label" for="password">Password</label>
                                 <asp:TextBox TextMode="Password" placeholder="Password" class="form-control" ID="txtPassword" runat="server"></asp:TextBox>
                             </div>
                             <div class="form-group d-md-flex">
                                 <div class="w-50 text-left">
-                                    <label class="checkbox-wrap checkbox-primary mb-0">
+                                    <label class="checkbox-wrap mb-0">
                                         Remember Me
                                         <asp:CheckBox ID="chkRememberMe" runat="server" Checked="True" />
                                         <span class="checkmark"></span>
@@ -60,7 +63,7 @@
                                 </div>--%>
                             </div>
                             <div class="form-group">
-                                <asp:Button ID="btnLogin" class="form-control btn btn-primary rounded submit px-3" runat="server" Text="Sign In" OnClick="btnLogin_Click" />
+                                <asp:Button ID="btnLogin" class="form-control btn rounded submit px-3" Style="background-color: orangered; color: white;" runat="server" Text="Sign In" OnClick="btnLogin_Click" />
                             </div>
                         </form>
                         <%--<p class="text-center">Not a member? <a data-toggle="tab" href="#signup">Sign Up</a></p>--%>
