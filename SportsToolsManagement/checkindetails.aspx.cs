@@ -32,7 +32,7 @@ namespace SportsToolsManagement
             {
                 Response.Redirect("Check-in.aspx");
             }
-            if(!IsPostBack)
+            if (!IsPostBack)
             {
                 Data_load();
             }
@@ -91,27 +91,56 @@ namespace SportsToolsManagement
             Label toolname = (Label)GridView1.Rows[e.RowIndex].FindControl("Label3");
             Label quntityreturn = (Label)GridView1.Rows[e.RowIndex].FindControl("Label7");
             con.Open();
-            string dltquery = "update [transaction] set quantity = '0' , status = '1' where trn_id='" + dltid.Text + "'";
-            SqlCommand cmd = new SqlCommand(dltquery, con);
-            if (cmd.ExecuteNonQuery() != 0)
+            string select = "select * from [transaction] where trn_id = '" + dltid.Text + "'";
+            SqlCommand slt = new SqlCommand(select, con);
+            SqlDataReader dr = slt.ExecuteReader();
+            if (dr.Read() == true)
             {
-                string select = "select * from tools where t_name = '" + toolname.Text + "'";
-                SqlCommand chng = new SqlCommand(select, con);
-                SqlDataReader dr = chng.ExecuteReader();
-                if (dr.Read() == true)
+                string update = "update [transaction] set quantity = '0' , status = '1' where trn_id='" + dltid.Text + "'";
+                SqlCommand up = new SqlCommand(update, con);
+                if (up.ExecuteNonQuery() != 0)
                 {
-                    int dbremain = Convert.ToInt32(dr["remain_quantity"]);
-                    int dbrent = Convert.ToInt32(dr["on_rent"]);
-                    dbrent = dbrent - Convert.ToInt32(quntityreturn.Text);
-                    dbremain = dbremain + Convert.ToInt32(quntityreturn.Text);
-                    dr.Close();
-                    string update = "update tools set remain_quantity = '" + dbremain + "' , on_rent = '" + dbrent + "' where t_name = '" + toolname.Text + "'";
-                    SqlCommand up = new SqlCommand(update, con);
-                    up.ExecuteNonQuery();
+                    string ret = "select * from tools where t_name = '" + toolname.Text + "'";
+                    SqlCommand chng = new SqlCommand(ret, con);
+                    dr = chng.ExecuteReader();
+                    if (dr.Read() == true)
+                    {
+                        int onrent = Convert.ToInt32(dr["on_rent"]);
+                        int remain = Convert.ToInt32(dr["remain_quantity"]);
+
+                        remain = remain + onrent;
+
+                        string upt = "update tools set remain_quantity = '" + remain + "' , on_rent = '0' where t_name = '" + toolname.Text + "'";
+                        SqlCommand cmd = new SqlCommand(upt, con);
+                        cmd.ExecuteNonQuery();
+                    }
                 }
             }
             con.Close();
+            //GridView1.EditIndex = -1;
             Data_load();
+            //con.Open();
+            //string dltquery = "update [transaction] set quantity = '0' , status = '1' where trn_id='" + dltid.Text + "'";
+            //SqlCommand cmd = new SqlCommand(dltquery, con);
+            //if (cmd.ExecuteNonQuery() != 0)
+            //{
+            //    string select = "select * from tools where t_name = '" + toolname.Text + "'";
+            //    SqlCommand chng = new SqlCommand(select, con);
+            //    SqlDataReader dr = chng.ExecuteReader();
+            //    if (dr.Read() == true)
+            //    {
+            //        int dbremain = Convert.ToInt32(dr["remain_quantity"]);
+            //        int dbrent = Convert.ToInt32(dr["on_rent"]);
+            //        dbrent = dbrent - Convert.ToInt32(quntityreturn.Text);
+            //        dbremain = dbremain + Convert.ToInt32(quntityreturn.Text);
+            //        dr.Close();
+            //        string update = "update tools set remain_quantity = '" + dbremain + "' , on_rent = '" + dbrent + "' where t_name = '" + toolname.Text + "'";
+            //        SqlCommand up = new SqlCommand(update, con);
+            //        up.ExecuteNonQuery();
+            //    }
+            //}
+            //con.Close();
+            //Data_load();
         }
 
         protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
@@ -132,69 +161,90 @@ namespace SportsToolsManagement
             Label toolname = (Label)GridView1.Rows[e.RowIndex].FindControl("Label4");
             TextBox quntityreturn = (TextBox)GridView1.Rows[e.RowIndex].FindControl("txtreturn");
             Label quntityhave = (Label)GridView1.Rows[e.RowIndex].FindControl("Label6");
-
-            if (Convert.ToInt32(quntityhave.Text) < Convert.ToInt32(quntityreturn.Text))
-            {
-                Page.ClientScript.RegisterStartupScript(this.GetType(), "script", "<script>alert('Please !!!!! Check return quntity......')</script>");
-            }
-            else
-            {
-                if (Convert.ToInt32(quntityhave.Text) == Convert.ToInt32(quntityreturn.Text))
+            //if (quntityreturn.Text == null)
+            //{
+            //    Page.ClientScript.RegisterStartupScript(this.GetType(), "script", "<script>alert('Please !!!!! Check return quantity......')</script>");
+            //}
+            //else
+            //{
+                if (Convert.ToInt32(quntityhave.Text) < Convert.ToInt32(quntityreturn.Text))
                 {
-                    con.Open();
-                    string upquery = "update [transaction] set quantity = '0' , status = '1' where trn_id='"+ id.Text + "'";
-                    SqlCommand cmd = new SqlCommand(upquery, con);
-                    if (cmd.ExecuteNonQuery() != 0)
-                    {
-                        string select = "select * from tools where t_name = '" + toolname.Text + "'";
-                        SqlCommand chng = new SqlCommand(select, con);
-                        SqlDataReader dr = chng.ExecuteReader();
-                        if (dr.Read() == true)
-                        {
-                            int dbremain = Convert.ToInt32(dr["remain_quantity"]);
-                            int dbrent = Convert.ToInt32(dr["on_rent"]);
-                            dbrent = dbrent - Convert.ToInt32(quntityreturn.Text);
-                            dbremain = dbremain + Convert.ToInt32(quntityreturn.Text);
-                            dr.Close();
-                            string update = "update tools set remain_quantity = '" + dbremain + "' , on_rent = '" + dbrent + "' where t_name = '" + toolname.Text + "'";
-                            SqlCommand up = new SqlCommand(update, con);
-                            up.ExecuteNonQuery();
-                        }
-                    }
-                    con.Close();
-                    GridView1.EditIndex = -1;
-                    Data_load();
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "script", "<script>alert('Please !!!!! Check return quantity......')</script>");
                 }
                 else
                 {
-                    con.Open();
-                    //string upquery = "update [transaction] set quantity = '"+ quntityreturn.Text + "' where trn_id='" + id.Text + "'";
-                    //SqlCommand cmd = new SqlCommand(upquery, con);
-                    //if (cmd.ExecuteNonQuery() != 0)
-                    //{
-                        string select = "select * from tools where t_name = '" + toolname.Text + "'";
-                        SqlCommand chng = new SqlCommand(select, con);
-                        SqlDataReader dr = chng.ExecuteReader();
+                    if (Convert.ToInt32(quntityhave.Text) == Convert.ToInt32(quntityreturn.Text))
+                    {
+                        con.Open();
+                        string select = "select * from [transaction] where trn_id = '" + id.Text + "'";
+                        SqlCommand slt = new SqlCommand(select, con);
+                        SqlDataReader dr = slt.ExecuteReader();
                         if (dr.Read() == true)
                         {
-                            int dbremain = Convert.ToInt32(dr["remain_quantity"]);
-                            int dbrent = Convert.ToInt32(dr["on_rent"]);
-                            dbrent = dbrent - Convert.ToInt32(quntityreturn.Text);
-                            dbremain = dbremain + Convert.ToInt32(quntityreturn.Text);
-                            dr.Close();
-                        string upquery = "update [transaction] set quantity = '" + quntityreturn.Text + "' where trn_id='" + id.Text + "'";
-                        SqlCommand cmd = new SqlCommand(upquery, con);
-                        cmd.ExecuteNonQuery();
-                        string update = "update tools set remain_quantity = '" + dbremain + "' , on_rent = '" + dbrent + "' where t_name = '" + toolname.Text + "'";
+                            int qu = Convert.ToInt32(dr["quantity"]);
+                            qu = qu - Convert.ToInt32(quntityreturn.Text);
+                            string update = "update [transaction] set quantity = '" + qu + "' , status = '1' where trn_id='" + id.Text + "'";
                             SqlCommand up = new SqlCommand(update, con);
-                            up.ExecuteNonQuery();
+                            if (up.ExecuteNonQuery() != 0)
+                            {
+                                string ret = "select * from tools where t_name = '" + toolname.Text + "'";
+                                SqlCommand chng = new SqlCommand(ret, con);
+                                dr = chng.ExecuteReader();
+                                if (dr.Read() == true)
+                                {
+                                    int onrent = Convert.ToInt32(dr["on_rent"]);
+                                    int remain = Convert.ToInt32(dr["remain_quantity"]);
+
+                                    onrent = onrent - Convert.ToInt32(quntityreturn.Text);
+                                    remain = remain + Convert.ToInt32(quntityreturn.Text);
+
+                                    string upt = "update tools set remain_quantity = '" + remain + "' , on_rent = '" + onrent + "' where t_name = '" + toolname.Text + "'";
+                                    SqlCommand cmd = new SqlCommand(upt, con);
+                                    cmd.ExecuteNonQuery();
+                                }
+                            }
                         }
-                    //}
-                    con.Close();
-                    GridView1.EditIndex = -1;
-                    Data_load();
+                        con.Close();
+                        GridView1.EditIndex = -1;
+                        Data_load();
+                    }
+                    else
+                    {
+                        con.Open();
+                        string select = "select * from [transaction] where trn_id = '" + id.Text + "'";
+                        SqlCommand slt = new SqlCommand(select, con);
+                        SqlDataReader dr = slt.ExecuteReader();
+                        if (dr.Read() == true)
+                        {
+                            int qu = Convert.ToInt32(dr["quantity"]);
+                            qu = qu - Convert.ToInt32(quntityreturn.Text);
+                            string update = "update [transaction] set quantity = '" + qu + "' where trn_id='" + id.Text + "'";
+                            SqlCommand up = new SqlCommand(update, con);
+                            if (up.ExecuteNonQuery() != 0)
+                            {
+                                string ret = "select * from tools where t_name = '" + toolname.Text + "'";
+                                SqlCommand chng = new SqlCommand(ret, con);
+                                dr = chng.ExecuteReader();
+                                if (dr.Read() == true)
+                                {
+                                    int onrent = Convert.ToInt32(dr["on_rent"]);
+                                    int remain = Convert.ToInt32(dr["remain_quantity"]);
+
+                                    onrent = onrent - Convert.ToInt32(quntityreturn.Text);
+                                    remain = remain + Convert.ToInt32(quntityreturn.Text);
+
+                                    string upt = "update tools set remain_quantity = '" + remain + "' , on_rent = '" + onrent + "' where t_name = '" + toolname.Text + "'";
+                                    SqlCommand cmd = new SqlCommand(upt, con);
+                                    cmd.ExecuteNonQuery();
+                                }
+                            }
+                        }
+                        con.Close();
+                        GridView1.EditIndex = -1;
+                        Data_load();
+                    }
                 }
-            }
+            //}
         }
     }
 }
