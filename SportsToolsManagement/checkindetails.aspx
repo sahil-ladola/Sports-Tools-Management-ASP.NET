@@ -16,6 +16,7 @@
     <link href="../assets/css/now-ui-dashboard.css?v=1.5.0" rel="stylesheet" />
 </head>
 <body>
+    <%--<form id="form1" runat="server">--%>
     <div class="wrapper ">
         <div class="sidebar" data-color="orange">
             <div class="logo">
@@ -97,7 +98,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table">
+                                    <%--    <table class="table">
                                         <thead class=" text-primary">
                                             <th>Email
                                             </th>
@@ -110,50 +111,126 @@
                                         </thead>
                                         <tbody>
                                             <form runat="server">
-                                                <%if (quantity.Count == 0)
+                                                <%--<%if (toolsname.Count == 0)
                                                     { %>
                                                 <tr>
                                                     <td colspan="4">No data available</td>
                                                 </tr>
                                                 <%}
-                                                else
-                                                {
-                                                    for (int i = 0; i <= quantity.Count - 1; i++)
+                                                    else
                                                     {
-
-                                                %>
+                                                        for (int i = 0; i <= toolsname.Count - 1; i++)
+                                                        {%>
                                                 <tr>
-                                                    <td><%Response.Write(Session["searchemail"]); %></td>
+                                                    <td><%Response.Write(Session["cinsearchemail"]); %></td>
+                                                    <td><%Response.Write(toolsname[i]); %></td>
                                                     <td>
-                                                        <%--<%Response.Write(); %>--%>
+                                                        <%Response.Write(quantity[i]); %>
                                                     </td>
                                                     <td>
-                                                        <asp:Label ID="customerhave" runat="server"></asp:Label>
+                                                        <asp:TextBox ID="txtreturn" class="form-control" Text="0" runat="server"></asp:TextBox>
                                                     </td>
                                                     <td>
-                                                        <asp:TextBox ID="txtreturn" class="form-control" runat="server"></asp:TextBox>
-                                                    </td>
+                                                        <%--<asp:HyperLink ID="Edit" runat="server" NavigateUrl="#">Edit</asp:HyperLink>--%><%--<a id="Edit" href="checksubmit.aspx?id=<%Response.Write(tid[i]);%>">Submit</a>--%><%--</td>
                                                 </tr>
-                                                <tr>
-                                                    <td>
-                                                        <asp:Button ID="btnsubmit" class="btn btn-primary btn-round" runat="server" Text="Submit" /></td>
-                                                    <td></td>
+                                                <% } } %>
+                                                <tr>--%><%--<td>
+                                                        <asp:Button ID="btnsubmit" class="btn btn-primary btn-round" runat="server" Text="Submit" OnClick="btnsubmit_Click" /></td>--%><%--<td></td>
                                                     <td></td>
                                                     <td>
                                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ControlToValidate="txtreturn" ErrorMessage="Field must be filled" Display="Dynamic" ForeColor="OrangeRed" Font-Bold="True" Font-Size="Small"></asp:RequiredFieldValidator>
                                                         <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" ControlToValidate="txtreturn" ErrorMessage="Invalid Quantity" Display="Dynamic" ValidationExpression="\d+" ForeColor="OrangeRed" Font-Bold="True" Font-Size="Small"></asp:RegularExpressionValidator>
                                                     </td>
-                                                </tr>
-                                                <% }
-                                                } %>
-                                            </form>
+                                                </tr>--%><%--      </form>
                                         </tbody>
-                                    </table>
+                                    </table>--%>
+                                    <form runat="server">
+                                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" BackColor="LightGoldenrodYellow" BorderColor="Tan" BorderWidth="1px" CellPadding="2" ForeColor="Black" GridLines="None" OnRowCancelingEdit="GridView1_RowCancelingEdit" OnRowDeleting="GridView1_RowDeleting" OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating" Width="1000px">
+                                            <AlternatingRowStyle BackColor="PaleGoldenrod" />
+                                            <Columns>
+                                                <asp:TemplateField HeaderText="id" Visible="False">
+                                                    <EditItemTemplate>
+                                                        <asp:Label ID="Label8" runat="server" Text='<%# Bind("trn_id") %>'></asp:Label>
+                                                    </EditItemTemplate>
+                                                    <HeaderTemplate>
+                                                        Id
+                                                    </HeaderTemplate>
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="id" runat="server" Text='<%# Bind("trn_id") %>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Email">
+                                                    <EditItemTemplate>
+                                                        <asp:Label ID="Label2" runat="server" Text='<%# Bind("email") %>'></asp:Label>
+                                                    </EditItemTemplate>
+                                                    <HeaderTemplate>
+                                                        Email
+                                                    </HeaderTemplate>
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="Label1" runat="server" Text='<%# Bind("email") %>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Tool name">
+                                                    <EditItemTemplate>
+                                                        <asp:Label ID="Label4" runat="server" Text='<%# Bind("t_name") %>'></asp:Label>
+                                                    </EditItemTemplate>
+                                                    <HeaderTemplate>
+                                                        Tool Name
+                                                    </HeaderTemplate>
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="Label3" runat="server" Text='<%# Bind("t_name") %>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Quantity customer have">
+                                                    <EditItemTemplate>
+                                                        <asp:Label ID="Label6" runat="server" Text='<%# Bind("quantity") %>'></asp:Label>
+                                                    </EditItemTemplate>
+                                                    <HeaderTemplate>
+                                                        Quantity customer have
+                                                    </HeaderTemplate>
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="Label5" runat="server" Text='<%# Bind("quantity") %>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Return quantity">
+                                                    <EditItemTemplate>
+                                                        <asp:TextBox ID="txtreturn" class="form-control" runat="server"></asp:TextBox>
+                                                    </EditItemTemplate>
+                                                    <HeaderTemplate>
+                                                        Return quantity
+                                                    </HeaderTemplate>
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="Label7" runat="server" Text="<%# 0 %>"></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Action">
+                                                    <EditItemTemplate>
+                                                        <asp:Button ID="Update" class="btn btn-primary btn-round" runat="server" Text="Update" />
+                                                        <asp:Button ID="Cancel" class="btn btn-secondary btn-round" runat="server" Text="Cancel" />
+                                                    </EditItemTemplate>
+                                                    <ItemTemplate>
+                                                        <asp:Button ID="Edit" class="btn btn-primary btn-round" runat="server" Text="Edit" />
+                                                        <asp:Button ID="Delete" class="btn btn-secondary btn-round" runat="server" Text="Delete" />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                            </Columns>
+                                            <FooterStyle BackColor="Tan" />
+                                            <HeaderStyle BackColor="Tan" Font-Bold="True" />
+                                            <PagerStyle BackColor="PaleGoldenrod" ForeColor="DarkSlateBlue" HorizontalAlign="Center" />
+                                            <SelectedRowStyle BackColor="DarkSlateBlue" ForeColor="GhostWhite" />
+                                            <SortedAscendingCellStyle BackColor="#FAFAE7" />
+                                            <SortedAscendingHeaderStyle BackColor="#DAC09E" />
+                                            <SortedDescendingCellStyle BackColor="#E1DB9C" />
+                                            <SortedDescendingHeaderStyle BackColor="#C2A47B" />
+                                        </asp:GridView>
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+        <%--</form>--%>
 </body>
 </html>

@@ -40,7 +40,7 @@ namespace SportsToolsManagement
 
         protected void Search_Click(object sender, ImageClickEventArgs e)
         {
-            Session["searchemail"] = txtsearch.Text;
+            Session["cinsearchemail"] = txtsearch.Text;
             getfname();
             getlname();
             getaddress();
