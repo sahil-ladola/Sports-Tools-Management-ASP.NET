@@ -107,10 +107,10 @@ namespace SportsToolsManagement
                     dr.Close();
                     string update = "update tools set remain_quantity = '" + dbremain + "' , on_rent = '" + dbrent + "' where t_name = '" + toolname.Text + "'";
                     SqlCommand up = new SqlCommand(update, con);
+                    up.ExecuteNonQuery();
                 }
             }
             con.Close();
-            //GridView1.EditIndex = -1;
             Data_load();
         }
 
@@ -132,13 +132,14 @@ namespace SportsToolsManagement
             Label toolname = (Label)GridView1.Rows[e.RowIndex].FindControl("Label4");
             TextBox quntityreturn = (TextBox)GridView1.Rows[e.RowIndex].FindControl("txtreturn");
             Label quntityhave = (Label)GridView1.Rows[e.RowIndex].FindControl("Label6");
-            if (Convert.ToInt32(quntityhave) < Convert.ToInt32(quntityreturn))
+
+            if (Convert.ToInt32(quntityhave.Text) < Convert.ToInt32(quntityreturn.Text))
             {
                 Page.ClientScript.RegisterStartupScript(this.GetType(), "script", "<script>alert('Please !!!!! Check return quntity......')</script>");
             }
             else
             {
-                if (Convert.ToInt32(quntityhave) == Convert.ToInt32(quntityreturn))
+                if (Convert.ToInt32(quntityhave.Text) == Convert.ToInt32(quntityreturn.Text))
                 {
                     con.Open();
                     string upquery = "update [transaction] set quantity = '0' , status = '1' where trn_id='"+ id.Text + "'";
@@ -157,6 +158,7 @@ namespace SportsToolsManagement
                             dr.Close();
                             string update = "update tools set remain_quantity = '" + dbremain + "' , on_rent = '" + dbrent + "' where t_name = '" + toolname.Text + "'";
                             SqlCommand up = new SqlCommand(update, con);
+                            up.ExecuteNonQuery();
                         }
                     }
                     con.Close();
@@ -166,10 +168,10 @@ namespace SportsToolsManagement
                 else
                 {
                     con.Open();
-                    string upquery = "update [transaction] set quantity = '"+ quntityreturn .Text + "' where trn_id='" + id.Text + "'";
-                    SqlCommand cmd = new SqlCommand(upquery, con);
-                    if (cmd.ExecuteNonQuery() != 0)
-                    {
+                    //string upquery = "update [transaction] set quantity = '"+ quntityreturn.Text + "' where trn_id='" + id.Text + "'";
+                    //SqlCommand cmd = new SqlCommand(upquery, con);
+                    //if (cmd.ExecuteNonQuery() != 0)
+                    //{
                         string select = "select * from tools where t_name = '" + toolname.Text + "'";
                         SqlCommand chng = new SqlCommand(select, con);
                         SqlDataReader dr = chng.ExecuteReader();
@@ -180,11 +182,14 @@ namespace SportsToolsManagement
                             dbrent = dbrent - Convert.ToInt32(quntityreturn.Text);
                             dbremain = dbremain + Convert.ToInt32(quntityreturn.Text);
                             dr.Close();
-                            string update = "update tools set remain_quantity = '" + dbremain + "' , on_rent = '" + dbrent + "' where t_name = '" + toolname.Text + "'";
+                        string upquery = "update [transaction] set quantity = '" + quntityreturn.Text + "' where trn_id='" + id.Text + "'";
+                        SqlCommand cmd = new SqlCommand(upquery, con);
+                        cmd.ExecuteNonQuery();
+                        string update = "update tools set remain_quantity = '" + dbremain + "' , on_rent = '" + dbrent + "' where t_name = '" + toolname.Text + "'";
                             SqlCommand up = new SqlCommand(update, con);
                             up.ExecuteNonQuery();
                         }
-                    }
+                    //}
                     con.Close();
                     GridView1.EditIndex = -1;
                     Data_load();
