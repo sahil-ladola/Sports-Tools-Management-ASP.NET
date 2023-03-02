@@ -66,7 +66,7 @@
                                     <span class="navbar-toggler-bar bar3"></span>
                                 </button>
                             </div>
-                            <asp:HyperLink ID="HyperLink5" class="navbar-brand" runat="server" NavigateUrl="~/Check-Out.aspx">Check-Out</asp:HyperLink>
+                            <asp:HyperLink ID="HyperLink5" class="navbar-brand" runat="server" NavigateUrl="~/Check-in.aspx">Check-In</asp:HyperLink>
                         </div>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -195,5 +195,15 @@
             </div>
         </div>
     </form>
+    <!--   Core JS Files   -->
+	<script src="assets/js/core/jquery.min.js"></script>
+	<script src="assets/js/core/popper.min.js"></script>
+	<script src="assets/js/core/bootstrap.min.js"></script>
+	<script src="assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+	<!--  Notifications Plugin    -->
+	<script src="assets/js/plugins/bootstrap-notify.js"></script>
+	<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+	<script src="assets/js/now-ui-dashboard.min.js?v=1.5.0"
+		type="text/javascript"></script>
 </body>
 </html>
