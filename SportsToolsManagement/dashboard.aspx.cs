@@ -38,9 +38,6 @@ namespace SportsToolsManagement
             }
             else
             {
-                Response.ClearHeaders();
-                Response.AddHeader("Cache-Control", "no-cache, no-store, max-age=0, must-revalidate");
-                Response.AddHeader("Pragma", "no-cache");
                 getnames();
                 getquan();
                 getremain();
@@ -58,6 +55,9 @@ namespace SportsToolsManagement
                 getgender();
                 getcontact();
                 getemail();
+                Response.ClearHeaders();
+                Response.AddHeader("Cache-Control", "no-cache, no-store, max-age=0, must-revalidate");
+                Response.AddHeader("Pragma", "no-cache");
             }
         }
         public void getfname()

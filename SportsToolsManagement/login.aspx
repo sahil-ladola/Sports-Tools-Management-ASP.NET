@@ -15,13 +15,16 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="container">
-        <%--<div class="row justify-content-center">
-            <div class="col-md-6 text-center mb-5">
-                <h2 class="heading-section">FunSports</h2>
+    <nav class="navbar bg-white">
+        <div class="container-fluid">
+            <h3 class="navbar-brand ml-5 pl-3">FunSports</h3>
+            <div class="d-flex">
+                <asp:HyperLink runat="server" class="text-decoration-none text-secondary nav-link mr-5 pr-4" NavigateUrl="~/index.aspx">Home</asp:HyperLink>
             </div>
-        </div>--%>
-        <div class="row justify-content-center mt-5">
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row justify-content-center mt-4">
             <div class="col-md-12 col-lg-10">
                 <div class="wrap d-md-flex">
                     <div class="img" style="background-image: url(images/login.jpg);">
@@ -31,12 +34,6 @@
                             <div class="w-100">
                                 <h3 class="mb-4 border-bottom">FunSports Sign In</h3>
                             </div>
-                            <%--<div class="w-100">
-                                <p class="social-media d-flex justify-content-end">
-                                    <a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-facebook"></span></a>
-                                    <a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-twitter"></span></a>
-                                </p>
-                            </div>--%>
                         </div>
                         <form runat="server" class="signin-form">
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtUsername" ErrorMessage="All field must be filled" Display="Dynamic" ForeColor="OrangeRed" Font-Bold="True" Font-Size="Small"></asp:RequiredFieldValidator>

@@ -152,7 +152,7 @@
                                                             </asp:TemplateField>
                                                             <asp:TemplateField HeaderText="Return quantity">
                                                                 <EditItemTemplate>
-                                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" ControlToValidate="txtreturn" ErrorMessage="Invalid Quantity" Display="Dynamic" ValidationExpression="\d+" ForeColor="OrangeRed" Font-Bold="True" Font-Size="Small"></asp:RegularExpressionValidator>
+                                                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" ControlToValidate="txtreturn" ErrorMessage="Invalid Quantity" Display="Dynamic" ValidationExpression="\d+" ForeColor="OrangeRed" Font-Bold="True" Font-Size="Small"></asp:RegularExpressionValidator>
                                                                     <asp:TextBox ID="txtreturn" class="form-control" runat="server" Text="0"></asp:TextBox>
                                                                 </EditItemTemplate>
                                                                 <HeaderTemplate>

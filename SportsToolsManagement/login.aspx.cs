@@ -42,22 +42,34 @@ namespace SportsToolsManagement
         {
             ViewState["Username"] = txtUsername.Text;
             ViewState["Password"] = txtPassword.Text;
-            if (txtUsername.Text == "sahilladola" && txtPassword.Text == "S@hil123")
+            con.Open();
+            string login = "select * from login where username ='" + txtUsername.Text + "'";
+            SqlCommand cmd = new SqlCommand(login, con);
+            SqlDataReader dr;
+            dr = cmd.ExecuteReader();
+            if (dr.Read())
             {
-                if (chkRememberMe.Checked)
+                if (dr["password"].ToString() == txtPassword.Text)
                 {
-                    Response.Cookies["Username"].Expires = DateTime.Now.AddDays(30);
-                    Response.Cookies["Password"].Expires = DateTime.Now.AddDays(30);
+                    if (chkRememberMe.Checked)
+                    {
+                        Response.Cookies["Username"].Expires = DateTime.Now.AddDays(30);
+                        Response.Cookies["Password"].Expires = DateTime.Now.AddDays(30);
+                    }
+                    else
+                    {
+                        Response.Cookies["Username"].Expires = DateTime.Now.AddDays(-1);
+                        Response.Cookies["Password"].Expires = DateTime.Now.AddDays(-1);
+                    }
+                    Response.Cookies["Username"].Value = txtUsername.Text.Trim();
+                    Response.Cookies["Password"].Value = txtPassword.Text.Trim();
+                    Session["login"] = "login";
+                    Response.Redirect("dashboard.aspx");
                 }
                 else
                 {
-                    Response.Cookies["Username"].Expires = DateTime.Now.AddDays(-1);
-                    Response.Cookies["Password"].Expires = DateTime.Now.AddDays(-1);
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "script", "<script>alert('Invalid Credential!')</script>");
                 }
-                Response.Cookies["Username"].Value = txtUsername.Text.Trim();
-                Response.Cookies["Password"].Value = txtPassword.Text.Trim();
-                Session["login"] = "login";
-                Response.Redirect("dashboard.aspx");
             }
             else
             {

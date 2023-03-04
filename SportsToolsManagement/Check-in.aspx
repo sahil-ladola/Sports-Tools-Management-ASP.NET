@@ -88,12 +88,14 @@
             <!-- End Navbar -->
             <div class="panel-header panel-header-sm">
             </div>
-            <nav class="navbar navbar-expand-lg bg-white">
+            <nav class="navbar navbar-expand-lg bg-primary">
                 <div class="container">
                     <div class="navbar-translate">
                         <form runat="server" class="form-inline ml-auto">
                             <div class="form-group no-border">
-                                <asp:TextBox ID="txtsearch" runat="server" class="form-control" placeholder="Search" ForeColor="Black"></asp:TextBox>
+                                <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ControlToValidate="txtsearch" ErrorMessage="Invalid Email address" ValidationExpression="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" Display="Dynamic" ForeColor="OrangeRed" Font-Bold="True" Font-Size="Small"></asp:RegularExpressionValidator>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ControlToValidate="txtsearch" ErrorMessage="All field must be filled" Display="Dynamic" ForeColor="OrangeRed" Font-Bold="True" Font-Size="Small"></asp:RequiredFieldValidator>
+                                <asp:TextBox ID="txtsearch" runat="server" class="form-control" placeholder="Enter email address" ForeColor="Black"></asp:TextBox>
                             </div>
                             <button type="submit" class="btn btn-neutral btn-icon btn-round">
                                 <asp:ImageButton ID="Search" class="now-ui-icons ui-1_zoom-bold" runat="server" OnClick="Search_Click" />
