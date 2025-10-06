@@ -48,7 +48,7 @@ A web application to manage sports equipment across an organization. It streamli
 
 ---
 
-## 🔐 Roles (example)
+## 🔐 Roles
 
 - Admin: Full system access, manage users, inventory, and reports
 - Manager/Staff: Manage inventory and handle issue/return operations
